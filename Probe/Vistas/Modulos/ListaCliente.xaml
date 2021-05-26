@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Probe.Vistas.Modulos"
+             mc:Ignorable="d"
+             x:Class="Probe.Vistas.Modulos.ListaCliente"
+             Title="Clientes">
+    <ContentPage.BindingContext>
+        <viewModels:ListaClienteViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <AbsoluteLayout
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand">
+            <StackLayout
+                AbsoluteLayout.LayoutFlags="All" 
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                HorizontalOptions="CenterAndExpand"
+                IsEnabled="{Binding IsEnabledPage}"
+                Margin="5,5,5,0"
+                VerticalOptions="CenterAndExpand">
+                <StackLayout
+                    Orientation="Horizontal">
+                    <Entry
+                        Text="{Binding NombreCliente}"
+                        Placeholder="Nombre"
+                        HorizontalOptions="FillAndExpand"/>
+                    <Button
+                        Command="{Binding BuscarClienteCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Buscar"/>
+                </StackLayout>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0"
+                    VerticalOptions="FillAndExpand">
+                    <ListView
+                        CachingStrategy="RecycleElementAndDataTemplate"
+                        HasUnevenRows="True"
+                        IsPullToRefreshEnabled="True"
+                        ItemsSource="{Binding Surveys}"
+                        SeparatorColor="#910b20"
+                        SeparatorVisibility="Default"
+                        VerticalOptions="FillAndExpand"
+                        x:Name="Surveys">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout
+                                        Padding="20">
+                                        <Label
+                                            FontSize="Large"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="Start"
+                                            Text="{Binding NombreComercial}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                IsVisible="{Binding Busy}" 
+                Padding="12"
+                x:Name="busy">
+                <ActivityIndicator
+                    IsRunning="{Binding Busy}"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

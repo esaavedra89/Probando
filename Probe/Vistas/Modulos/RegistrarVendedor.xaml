@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:Probe.Vistas.Modulos"
+             x:Class="Probe.Vistas.Modulos.RegistrarVendedor"
+             Title="Registrar vendedor">
+    <ContentPage.BindingContext>
+        <viewModels:RegistrarVendedorVistaModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <AbsoluteLayout
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand">
+            <ScrollView 
+                Margin="30"
+                AbsoluteLayout.LayoutFlags="All" 
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding IsEnabledPage}"
+                VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                    
+                
+                <Label 
+                    Text="Registrar vendedor"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,30"/>
+                <Entry
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="Nombre"
+                    Text="{Binding Nombre}"/>
+                <Entry
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="Apellido"
+                    Text="{Binding Apellido}"/>
+                <Entry
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand" 
+                    Keyboard="Numeric"
+                    Placeholder="Cédula"
+                    Text="{Binding Cedula}"/>
+                <Entry
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="Correo electrónico"
+                    Text="{Binding Email}"/>
+                <Entry
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand" 
+                    Keyboard="Numeric"
+                    Placeholder="Teléfono"
+                    Text="{Binding Telefono}"/>
+                <Entry
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Usuario"
+                    Text="{Binding Usuario}"/>
+                <Entry
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="Contraseña"
+                    Text="{Binding Contrasenna}"/>
+                <Button
+                    FontSize="Medium"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0,20,0,0"
+                    Text="Actualizar"
+                    Command="{Binding AcualizarCommand}"/>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                IsVisible="{Binding Busy}" 
+                Padding="12"
+                x:Name="busy">
+                <ActivityIndicator
+                    IsRunning="{Binding Busy}"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

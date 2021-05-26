@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Probe.Vistas.Modulos"
+             mc:Ignorable="d"
+             x:Class="Probe.Vistas.Modulos.Home"
+             Title="Home">
+    <ContentPage.BindingContext>
+        <viewModels:HomeViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout
+            VerticalOptions="FillAndExpand">
+            <StackLayout 
+                Margin="50,50,50,100"
+                VerticalOptions="FillAndExpand">
+                <Label 
+                    Text="Resumen"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    Margin="0,15,0,40"/>
+                <Button
+                    Text="Registro Cliente"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding NavegarRegistroCommand}"/>
+                <Button
+                    Text="Lista Cliente"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding NavegarListaCommand}"/>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

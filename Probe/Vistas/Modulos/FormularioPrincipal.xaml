@@ -1,0 +1,829 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Probe.Vistas.Modulos"
+             mc:Ignorable="d"
+             x:Class="Probe.Vistas.Modulos.FormularioPrincipal"
+             Title="Registro de Cliente"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <AbsoluteLayout
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand">
+            <ScrollView
+                AbsoluteLayout.LayoutFlags="All" 
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding IsEnabledPage}"
+                VerticalOptions="FillAndExpand">
+                <StackLayout 
+                    Margin="30"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout 
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="StartAndExpand">
+                        <StackLayout
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Button
+                                HorizontalOptions="FillAndExpand"
+                                Text="Resumen"
+                                Command="{Binding IsVisible1Command}"
+                                WidthRequest="100"/>
+                            <Button
+                                HorizontalOptions="FillAndExpand"
+                                Text="Generales"
+                                WidthRequest="100"
+                                Command="{Binding IsVisible2Command}"/>
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Button
+                                HorizontalOptions="FillAndExpand"
+                                Text="Contacto"
+                                Command="{Binding IsVisible3Command}"
+                                WidthRequest="100"/>
+                            <Button
+                                HorizontalOptions="FillAndExpand"
+                                Text="Consumo"
+                                Command="{Binding IsVisible4Command}"
+                                WidthRequest="100"/>
+                        </StackLayout>
+                        <Button
+                            HorizontalOptions="Center"
+                            Text="Ubicación"
+                            Command="{Binding IsVisible5Command}"
+                            WidthRequest="100"/>
+                    </StackLayout>
+                    
+                    <!--Resumen-->
+                    <StackLayout 
+                        IsVisible="{Binding IsVisible1}">
+                        <Label 
+                        Text="Resumen"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        Margin="0,15,0,15"/>
+                        <Label
+                        FontSize="Medium"
+                        HorizontalOptions="FillAndExpand"
+                        Text="RIF"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el RIF"
+                            Text="{Binding RIF}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Nombre comercial"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el nombre comercial"
+                            Text="{Binding NombreComercial}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Estado cliente"/>
+                        <Picker
+                            HorizontalOptions="FillAndExpand"
+                            ItemsSource="{Binding ListaEstadoCliente}"
+                            ItemDisplayBinding="{Binding Name}"
+                            IsEnabled="{Binding ModoLectura}"
+                            Margin="0"
+                            SelectedItem="{Binding EstadoClienteSeleccionada}"
+                            Title="Seleccione"
+                            VerticalOptions="Center">
+                        </Picker>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Sector comercial"/>
+                        <Picker
+                            HorizontalOptions="FillAndExpand"
+                            ItemsSource="{Binding ListaSectorComercial}"
+                            ItemDisplayBinding="{Binding Name}"
+                            IsEnabled="{Binding ModoLectura}"
+                            Margin="0"
+                            SelectedItem="{Binding SectorComercialSeleccionada}"
+                            Title="Seleccione"
+                            VerticalOptions="Center">
+                        </Picker>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Nombre contacto"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el nombre de contacto #1"
+                            Text="{Binding NombreContacto1}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Apellido contacto"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el apellido de contacto #1"
+                            Text="{Binding ApellidoContacto1}"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Teléfono #1"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding LlamarTelefono1Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_local_phone"/>
+                        </StackLayout>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese el teléfono #1"
+                            Text="{Binding Telefono1}"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Correo electrónico #1"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding EnviarEmail1Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_email"/>
+                        </StackLayout>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese correo electrónico #1"
+                            Text="{Binding Email1}"
+                            x:Name="entEmail1"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Página web"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese la página web"
+                            Text="{Binding Web}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Instagram"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese cuenta de Instagram"
+                            Text="{Binding Instagram}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Facebook"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese cuenta de Facebook"
+                            Text="{Binding Facebook}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Whatsapp Business"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese número de Whatsapp Business"
+                            Text="{Binding WhatsappBusiness}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Siguiente acción"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese la siguiente acción"
+                            Text="{Binding SiguienteAccion}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Fecha de siguiente acción"/>
+                        <DatePicker
+                            Date="{Binding SiguienteAccionSelected}"    
+                            Format="dd/MM/yyyy"
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Observaciones"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese las observaciones"
+                            Text="{Binding Observaciones}"/>
+                    </StackLayout>
+
+                    <!--Datos generales-->
+                    <StackLayout
+                        IsVisible="{Binding IsVisible2}">
+                        <Label 
+                            Text="Datos generales"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Margin="0,15,0,15"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Razón social"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese la razón social"
+                            Text="{Binding RazonSocial}"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Correo electrónico #2"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding EnviarEmail2Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_email"/>
+                        </StackLayout>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el correo electrónico #2"
+                            Text="{Binding Email2}"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Teléfono #2"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding LlamarTelefono2Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_local_phone"/>
+                        </StackLayout>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese el teléfono #2"
+                            Text="{Binding Telefono2}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Dirección"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese dirección"
+                            Text="{Binding Direccion}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Parroquia"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese la parroquia"
+                            Text="{Binding Parroquia}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Municipio"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el municipio"
+                            Text="{Binding Municipio}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Ciudad"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese la ciudad"
+                            Text="{Binding Ciudad}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Código postal"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el código postal"
+                            Text="{Binding CodigoPostal}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Estado"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el estado"
+                            Text="{Binding Estado}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Fecha primera visita"/>
+                        <DatePicker
+                            Date="{Binding PrimeraVisitaSelected}"    
+                            FontSize="Medium"
+                            Format="dd/MM/yyyy"
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding ModoLectura}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Fecha primera compra"/>
+                        <DatePicker
+                            Date="{Binding PrimeraCompraSelected}"    
+                            FontSize="Medium"
+                            Format="dd/MM/yyyy"
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding ModoLectura}"/>
+                        
+                    </StackLayout>
+
+                    <!--Persona contacto-->
+                    <StackLayout
+                        IsVisible="{Binding IsVisible3}">
+                        <Label 
+                            Text="Persona contacto"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Margin="0,15,0,15"/>
+                        <Label
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Margin="10"
+                            Text="Contacto #1"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Correo electrónico #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese correo electrónico #1"
+                            Text="{Binding Email11}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Correo electrónico #2"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese correo electrónico #2"
+                            Text="{Binding Email12}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Teléfono #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese teléfono #1"
+                            Text="{Binding Telefono11}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Teléfono #2"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese teléfono #2"
+                            Text="{Binding Telefono12}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Instagram #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese cuenta de Instagram #1"
+                            Text="{Binding Instagram1}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Facebook #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese cuenta Facebook #1"
+                            Text="{Binding Facebook1}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Hobbies #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese los hobbies #1"
+                            Text="{Binding Hobbies1}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Persona relacionada #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese la persona relacionada #1"
+                            Text="{Binding PersonaRelacionada1}"/>
+
+                        <Label
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Margin="10"
+                            Text="Contacto #2"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Nombre"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el nombre de contacto #2"
+                            Text="{Binding NombreContacto2}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Apellido"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el apellido de contacto #2"
+                            Text="{Binding ApellidoContacto2}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Correo electrónico #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese el correo electrónico #1"
+                            Text="{Binding Email21}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Correo electrónico #2"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese correo electrónico #2"
+                            Text="{Binding Email22}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Teléfono #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese teléfono #1"
+                            Text="{Binding Telefono21}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Teléfono #2"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese teléfono #2"
+                            Text="{Binding Telefono22}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Instagram #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese cuenta de Instagram #1"
+                            Text="{Binding Instagram2}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Facebook #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese cuenta de Facebook #1"
+                            Text="{Binding Facebook2}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Hobbies #1"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese Hobbies #1"
+                            Text="{Binding Hobbies2}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Persona relacionada #2"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Placeholder="Ingrese la persona relacionada #1"
+                            Text="{Binding PersonaRelacionada2}"/>
+                    </StackLayout>
+
+                    <!--Consumo Potencial-->
+                    <StackLayout
+                        IsVisible="{Binding IsVisible4}">
+                        <Label 
+                            Text="Consumo mensual aproximado en litros"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Margin="0,15,0,15"/>
+                        
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Mineral 15w40"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Mineral 15w40"
+                            Text="{Binding Mineral15w40}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Mineral 20w50"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Mineral 20w50"
+                            Text="{Binding Mineral20w50}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Semi sintético 15w40"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Semi sintético 15w40"
+                            Text="{Binding SemiSintetico15w40}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Semi sintético 20w50"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Semi sintético 20w50"
+                            Text="{Binding SemiSintetico20w50}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Dexron III"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Dexron III"
+                            Text="{Binding DexronIII}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="4t motos"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de 4t motos"
+                            Text="{Binding Motos4T}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="ISO 80w90"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de ISO 80w90"
+                            Text="{Binding ISO80w90}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Diésel 50"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Diésel 50"
+                            Text="{Binding Diesel50}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Diésel 15w40"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Diésel 15w40"
+                            Text="{Binding Diesel15w40}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Hidraulico 68"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Hidraulico 68"
+                            Text="{Binding Hidraulico68}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Liga de freno DOT 3"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Liga de freno DOT 3"
+                            Text="{Binding LigaFrenoDot3}"/>
+                        <Label
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Flushing"/>
+                        <Entry
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand" 
+                            IsEnabled="{Binding ModoLectura}"
+                            Keyboard="Numeric"
+                            Placeholder="Ingrese cantidad de Flushing"
+                            Text="{Binding Flushing}"/>
+                    </StackLayout>
+
+                    <!--Ubicación-->
+                    <StackLayout
+                        IsVisible="{Binding IsVisible5}"
+                        VerticalOptions="CenterAndExpand"
+                        Margin="0,0,0,60">
+                        <Label 
+                            Text="Ubicación cliente"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Margin="0,15,0,15"/>
+                        <StackLayout 
+                            Orientation="Horizontal">
+                            <Button
+                                Command="{Binding ObtenerUbicacionCommand}"
+                                FontSize="Medium"
+                                HorizontalOptions="StartAndExpand" 
+                                IsEnabled="{Binding ModoLectura}"
+                                Text="Obtener ubicación"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding OpenMapCommand}"
+                                HeightRequest="15"
+                                ImageSource="ic_location_on_red"/>
+                        </StackLayout>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Latitud"/>
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Longitud"/>
+                            <Entry
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                IsEnabled="False"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand" 
+                                Placeholder="Latitud"
+                                Text="{Binding Latitud}"/>
+                            <Entry
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                IsEnabled="False"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand" 
+                                Placeholder="Longitud"
+                                Text="{Binding Longitud}"/>
+                        </Grid>
+                    </StackLayout>
+                    
+                    <Button
+                        Command="{Binding AcualizarCommand}"
+                        FontSize="Medium"
+                        HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding ModoLectura}"
+                        Margin="0,20,0,0"
+                        Text="Actualizar"/>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                IsVisible="{Binding Busy}" 
+                Padding="12"
+                x:Name="busy">
+                <ActivityIndicator
+                    IsRunning="{Binding Busy}"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

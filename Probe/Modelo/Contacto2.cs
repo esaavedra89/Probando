@@ -7,6 +7,33 @@ namespace Probe.Modelo
 {
     public class Contacto2
     {
+        public int IdContacto2Local { get; set; }
+
+        public int IdContacto2 { get; set; }
+
+        public string NombreContacto2 { get; set; }
+
+        public string ApellidoContacto2 { get; set; }
+
+        public string Email21 { get; set; }
+
+        public string Email22 { get; set; }
+
+        public string Telefono21 { get; set; }
+
+        public string Telefono22 { get; set; }
+
+        public string Instagram2 { get; set; }
+
+        public string Facebook12{ get; set; }
+
+        public string Hobbies2 { get; set; }
+
+        public string PersonaRelacionada2 { get; set; }
+    }
+
+    public class Contact_2
+    {
         [JsonProperty(PropertyName = "IdContacto2Local")]
         public int IdContacto2Local { get; set; }
 
@@ -35,7 +62,7 @@ namespace Probe.Modelo
         public string Instagram2 { get; set; }
 
         [JsonProperty(PropertyName = "Facebook12")]
-        public string Facebook12{ get; set; }
+        public string Facebook12 { get; set; }
 
         [JsonProperty(PropertyName = "Hobbies2")]
         public string Hobbies2 { get; set; }

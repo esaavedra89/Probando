@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Probe.Modelo;
+using Probe.Modelo.Modulos;
 using Probe.Modelo.Modulos.Sistema;
 using System;
 using System.Collections.Generic;
@@ -116,18 +117,26 @@ namespace Probe.Negocio.Modulos
                 }
                 else
                 {
-                    //string result = string.Empty;
+                    List<Empresa> objEmpresa = new List<Empresa>();
                     Stream resStream = null;
-
-                    //result = response.Content.ReadAsStringAsync().Result;
-                    //result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                    //string resStreams = response.Content.ReadAsStringAsync().Result;
                     resStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
-                    //RespuestaAPI objRespuestaApi = JsonConvert.DeserializeObject<RespuestaAPI>(resStreams);
+                    // Leemos la respuesta stream.
+                    using (StreamReader sr1 = new StreamReader(resStream))
+                    using (JsonReader reader1 = new JsonTextReader(sr1))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        var generalRutas = serializer.Deserialize<RespuestaAPI>(reader1);
+                        if (generalRutas != null)
+                        {
+                            if (generalRutas.data.surveys != null)
+                            {
+                                objEmpresa = await EmparejarObjetoSurvey(generalRutas.data.surveys);
+                            }
+                        }
+                    }
 
-                    objRespuesta.RespuestaExitosa(0, "OK", resStream);
+                    objRespuesta.RespuestaExitosa(0, "OK", objEmpresa);
                 }
             }
             catch (Exception exc)
@@ -139,5 +148,103 @@ namespace Probe.Negocio.Modulos
             return objRespuesta;
         }
 
+        async Task<List<Empresa>> EmparejarObjetoSurvey(List<Survey> objRecSurvey) 
+        {
+            List<Empresa> objSurvey = new List<Empresa>();
+
+            try
+            {
+                for (int i = 0; i < objRecSurvey.Count; i++)
+                {
+                    Survey item = objRecSurvey[i];
+
+                    Empresa objEmpresa = new Empresa();
+
+                    objEmpresa.IdEmpresa = item.IdEmpresa;
+                    objEmpresa.IdVendedor = item.IdVendedor;
+                    objEmpresa.RIF = item.RIF;
+                    objEmpresa.RazonSocial = item.RazonSocial;
+                    objEmpresa.NombreComercial = item.NombreComercial;
+                    objEmpresa.Email1 = item.Email1;
+                    objEmpresa.Email2 = item.Email2;
+                    objEmpresa.Telefono1 = item.Telefono1;
+                    objEmpresa.Telefono2 = item.Telefono2;
+                    objEmpresa.SitioWeb = item.SitioWeb;
+                    objEmpresa.Instagram = item.Instagram;
+                    objEmpresa.Facebook = item.Facebook;
+                    objEmpresa.WhatsappBusiness = item.WhatsappBusiness;
+                    objEmpresa.Direccion = item.Direccion;
+                    objEmpresa.Parroquia = item.Parroquia;
+                    objEmpresa.Municipio = item.Municipio;
+                    objEmpresa.Ciudad = item.Ciudad;
+                    objEmpresa.CodigoPostal = item.CodigoPostal;
+                    objEmpresa.Estado = item.Estado;
+                    objEmpresa.Latitud = item.position.lat;
+                    objEmpresa.Longitud = item.position.lng;
+
+                    objEmpresa.IdEstadoCliente = (string.IsNullOrEmpty(item.IdEstadoCliente) ? 0 : Convert.ToInt32(item.IdEstadoCliente));
+                    objEmpresa.NombreEstadoCliente = item.NombreEstadoCliente;
+
+                    // Contacto #1.
+                    objEmpresa.Contacto1 = new Contacto1();
+                    objEmpresa.Contacto1.NombreContacto1 = item.contacts.contact_1.NombreContacto1;
+                    objEmpresa.Contacto1.ApellidoContacto1 = item.contacts.contact_1.ApellidoContacto1;
+                    objEmpresa.Contacto1.Email11 = item.contacts.contact_1.Email11;
+                    objEmpresa.Contacto1.Email12 = item.contacts.contact_1.Email12;
+                    objEmpresa.Contacto1.Telefono11 = item.contacts.contact_1.Telefono11;
+                    objEmpresa.Contacto1.Telefono12 = item.contacts.contact_1.Telefono12;
+                    objEmpresa.Contacto1.Instagram1 = item.contacts.contact_1.Instagram1;
+                    objEmpresa.Contacto1.Facebook1 = item.contacts.contact_1.Facebook1;
+                    objEmpresa.Contacto1.Hobbies1 = item.contacts.contact_1.Hobbies1;
+                    objEmpresa.Contacto1.PersonaRelacionada1 = item.contacts.contact_1.PersonaRelacionada1;
+
+                    // Contacto #2.
+                    objEmpresa.Contacto2 = new Contacto2();
+                    objEmpresa.Contacto2.NombreContacto2 = item.contacts.contact_2.NombreContacto2;
+                    objEmpresa.Contacto2.ApellidoContacto2 = item.contacts.contact_2.ApellidoContacto2;
+                    objEmpresa.Contacto2.Email21 = item.contacts.contact_2.Email21;
+                    objEmpresa.Contacto2.Email22 = item.contacts.contact_2.Email22;
+                    objEmpresa.Contacto2.Telefono21 = item.contacts.contact_2.Telefono21;
+                    objEmpresa.Contacto2.Telefono22 = item.contacts.contact_2.Telefono22;
+                    objEmpresa.Contacto2.Instagram2 = item.contacts.contact_2.Instagram2;
+                    objEmpresa.Contacto2.Facebook12 = item.contacts.contact_2.Facebook12;
+                    objEmpresa.Contacto2.Hobbies2 = item.contacts.contact_2.Hobbies2;
+                    objEmpresa.Contacto2.PersonaRelacionada2 = item.contacts.contact_2.PersonaRelacionada2;
+
+                    objEmpresa.IdSectorComercial = item.IdSectorComercial;
+                    objEmpresa.SectorComercial = item.SectorComercial;
+
+                    // Consumo mensual aproximado en litros.
+                    objEmpresa.Consumo = new Consumo();
+                    objEmpresa.Consumo.Mineral15w40 = item.Consumo.Mineral15w40;
+                    objEmpresa.Consumo.Mineral20w50 = item.Consumo.Mineral20w50;
+                    objEmpresa.Consumo.SemiSintetico15w40 = item.Consumo.SemiSintetico15w40;
+                    objEmpresa.Consumo.SemiSintetico20w50 = item.Consumo.SemiSintetico20w50;
+                    objEmpresa.Consumo.DexronIII = item.Consumo.DexronIII;
+                    objEmpresa.Consumo.Motos4t = item.Consumo.Motos4t;
+                    objEmpresa.Consumo.ISO80w90 = item.Consumo.ISO80w90;
+                    objEmpresa.Consumo.Diesel50 = item.Consumo.Diesel50;
+                    objEmpresa.Consumo.Diesel15w40 = item.Consumo.Diesel15w40;
+                    objEmpresa.Consumo.Hidraulico68 = item.Consumo.Hidraulico68;
+                    objEmpresa.Consumo.LigaFrenoDot3 = item.Consumo.LigaFrenoDot3;
+                    objEmpresa.Consumo.Flushing = item.Consumo.Flushing;
+
+                    objEmpresa.Observaciones = item.Observaciones;
+                    objEmpresa.FechaPrimeraVisita = item.FechaPrimeraVisita;
+                    objEmpresa.FechaPrimeraCompra = item.FechaPrimeraCompra;
+                    objEmpresa.SiguienteAccion = item.SiguienteAccion;
+                    objEmpresa.FechaSiguienteAccion = item.FechaSiguienteAccion;
+                    objEmpresa.VendedorEncargado = item.VendedorEncargado;
+
+                    objSurvey.Add(objEmpresa);
+                }
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+
+            return objSurvey;
+        }
     }
 }

@@ -28,6 +28,9 @@
                         Placeholder="Nombre"
                         HorizontalOptions="FillAndExpand"/>
                     <Button
+                         BackgroundColor="#003399"
+                                TextColor="White"
+                                FontAttributes="Bold"
                         Command="{Binding BuscarClienteCommand}"
                         HorizontalOptions="FillAndExpand"
                         Text="Buscar"/>

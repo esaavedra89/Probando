@@ -68,6 +68,9 @@
                     Placeholder="Contraseña"
                     Text="{Binding Contrasenna}"/>
                 <Button
+                     BackgroundColor="#003399"
+                                TextColor="White"
+                                FontAttributes="Bold"
                     FontSize="Medium"
                     HorizontalOptions="FillAndExpand"
                     Margin="0,20,0,0"

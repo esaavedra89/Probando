@@ -19,44 +19,51 @@
                 IsEnabled="{Binding IsEnabledPage}"
                 VerticalOptions="FillAndExpand">
                 <StackLayout 
-                    Margin="30"
+                    Margin="10"
                     VerticalOptions="FillAndExpand">
                     <StackLayout 
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="StartAndExpand">
+                        VerticalOptions="Center">
                         <StackLayout
                             Orientation="Horizontal"
                             HorizontalOptions="FillAndExpand">
                             <Button
-                                HorizontalOptions="FillAndExpand"
-                                Text="Resumen"
                                 Command="{Binding IsVisible1Command}"
-                                WidthRequest="100"/>
+                                WidthRequest="35"
+                                BackgroundColor="White"
+                                HorizontalOptions="CenterAndExpand"
+                                ImageSource="ic_content_paste"/>
                             <Button
-                                HorizontalOptions="FillAndExpand"
-                                Text="Generales"
-                                WidthRequest="100"
-                                Command="{Binding IsVisible2Command}"/>
-                        </StackLayout>
-                        <StackLayout
-                            Orientation="Horizontal"
-                            HorizontalOptions="FillAndExpand">
+                                Command="{Binding IsVisible2Command}"
+                                BackgroundColor="White"
+                                HorizontalOptions="CenterAndExpand"
+                                WidthRequest="35"
+                                ImageSource="ic_assignment"/>
                             <Button
-                                HorizontalOptions="FillAndExpand"
-                                Text="Contacto"
                                 Command="{Binding IsVisible3Command}"
-                                WidthRequest="100"/>
+                                HorizontalOptions="CenterAndExpand"
+                                BackgroundColor="White"
+                                WidthRequest="35"
+                                ImageSource="ic_account_box"/>
                             <Button
-                                HorizontalOptions="FillAndExpand"
-                                Text="Consumo"
+                                Command="{Binding IsVisible6Command}"
+                                HorizontalOptions="CenterAndExpand"
+                                BackgroundColor="White"
+                                WidthRequest="35"
+                                ImageSource="ic_assignment_ind"/>
+                            <Button
                                 Command="{Binding IsVisible4Command}"
-                                WidthRequest="100"/>
+                                HorizontalOptions="CenterAndExpand"
+                                BackgroundColor="White"
+                                WidthRequest="35"
+                                ImageSource="ic_opacity"/>
+                            <Button
+                                Command="{Binding IsVisible5Command}"
+                                HorizontalOptions="CenterAndExpand"
+                                BackgroundColor="White"
+                                WidthRequest="35"
+                                ImageSource="ic_location_on"/>
                         </StackLayout>
-                        <Button
-                            HorizontalOptions="Center"
-                            Text="Ubicación"
-                            Command="{Binding IsVisible5Command}"
-                            WidthRequest="100"/>
                     </StackLayout>
                     
                     <!--Resumen-->
@@ -64,14 +71,13 @@
                         IsVisible="{Binding IsVisible1}">
                         <Label 
                         Text="Resumen"
-                        FontSize="20"
+                        FontSize="18"
                         FontAttributes="Bold"
-                        HorizontalOptions="Center"
-                        Margin="0,15,0,15"/>
+                        HorizontalOptions="Center"/>
                         <Label
-                        FontSize="Medium"
-                        HorizontalOptions="FillAndExpand"
-                        Text="RIF"/>
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text="RIF"/>
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand"
@@ -91,7 +97,7 @@
                         <Label
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand"
-                            Text="Estado cliente"/>
+                            Text="Estatus cliente"/>
                         <Picker
                             HorizontalOptions="FillAndExpand"
                             ItemsSource="{Binding ListaEstadoCliente}"
@@ -126,16 +132,6 @@
                             IsEnabled="{Binding ModoLectura}"
                             Placeholder="Ingrese el nombre de contacto #1"
                             Text="{Binding NombreContacto1}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Apellido contacto"/>
-                        <Entry
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand" 
-                            IsEnabled="{Binding ModoLectura}"
-                            Placeholder="Ingrese el apellido de contacto #1"
-                            Text="{Binding ApellidoContacto1}"/>
                         <StackLayout 
                             Orientation="Horizontal"
                             HorizontalOptions="FillAndExpand">
@@ -176,10 +172,20 @@
                             Placeholder="Ingrese correo electrónico #1"
                             Text="{Binding Email1}"
                             x:Name="entEmail1"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Página web"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Página web"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding NavegarWebCommand}"
+                                HeightRequest="15"
+                                ImageSource="ic_language"/>
+                        </StackLayout>
+                        
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
@@ -254,10 +260,9 @@
                         IsVisible="{Binding IsVisible2}">
                         <Label 
                             Text="Datos generales"
-                            FontSize="20"
+                            FontSize="18"
                             FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            Margin="0,15,0,15"/>
+                            HorizontalOptions="Center"/>
                         <Label
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand"
@@ -390,44 +395,72 @@
                         
                     </StackLayout>
 
-                    <!--Persona contacto-->
+                    <!--Persona contacto #1-->
                     <StackLayout
                         IsVisible="{Binding IsVisible3}">
                         <Label 
                             Text="Persona contacto"
-                            FontSize="20"
+                            FontSize="18"
                             FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            Margin="0,15,0,15"/>
+                            HorizontalOptions="Center"/>
                         <Label
                             FontSize="18"
                             HorizontalOptions="Start"
                             Margin="10"
                             Text="Contacto #1"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Correo electrónico #1"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Correo electrónico #1"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding EnviarEmail11Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_email"/>
+                        </StackLayout>
+                        
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
                             IsEnabled="{Binding ModoLectura}"
                             Placeholder="Ingrese correo electrónico #1"
                             Text="{Binding Email11}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Correo electrónico #2"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Correo electrónico #2"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding EnviarEmail12Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_email"/>
+                        </StackLayout>
+                       
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
                             IsEnabled="{Binding ModoLectura}"
                             Placeholder="Ingrese correo electrónico #2"
                             Text="{Binding Email12}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Teléfono #1"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Teléfono #1"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding LlamarTelefono11Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_local_phone"/>
+                        </StackLayout>
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
@@ -435,10 +468,19 @@
                             Keyboard="Numeric"
                             Placeholder="Ingrese teléfono #1"
                             Text="{Binding Telefono11}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Teléfono #2"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Teléfono #2"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding LlamarTelefono12Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_local_phone"/>
+                        </StackLayout>
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand"
@@ -486,7 +528,11 @@
                             IsEnabled="{Binding ModoLectura}"
                             Placeholder="Ingrese la persona relacionada #1"
                             Text="{Binding PersonaRelacionada1}"/>
+                    </StackLayout>
 
+                    <!--Persona contacto #2-->
+                    <StackLayout
+                        IsVisible="{Binding IsVisible6}">
                         <Label
                             FontSize="18"
                             HorizontalOptions="Start"
@@ -502,40 +548,58 @@
                             IsEnabled="{Binding ModoLectura}"
                             Placeholder="Ingrese el nombre de contacto #2"
                             Text="{Binding NombreContacto2}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Apellido"/>
-                        <Entry
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand" 
-                            IsEnabled="{Binding ModoLectura}"
-                            Placeholder="Ingrese el apellido de contacto #2"
-                            Text="{Binding ApellidoContacto2}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Correo electrónico #1"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Correo electrónico #1"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding EnviarEmail21Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_email"/>
+                        </StackLayout>
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
                             IsEnabled="{Binding ModoLectura}"
                             Placeholder="Ingrese el correo electrónico #1"
                             Text="{Binding Email21}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Correo electrónico #2"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Correo electrónico #2"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding EnviarEmail22Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_email"/>
+                        </StackLayout>
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
                             IsEnabled="{Binding ModoLectura}"
                             Placeholder="Ingrese correo electrónico #2"
                             Text="{Binding Email22}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Teléfono #1"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Teléfono #1"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding LlamarTelefono21Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_local_phone"/>
+                        </StackLayout>
+                        
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
@@ -543,10 +607,20 @@
                             Keyboard="Numeric"
                             Placeholder="Ingrese teléfono #1"
                             Text="{Binding Telefono21}"/>
-                        <Label
-                            FontSize="Medium"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Teléfono #2"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Teléfono #2"/>
+                            <Button
+                                BackgroundColor="White"
+                                Command="{Binding LlamarTelefono22Command}"
+                                HeightRequest="15"
+                                ImageSource="ic_local_phone"/>
+                        </StackLayout>
+                        
                         <Entry
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand" 
@@ -601,10 +675,9 @@
                         IsVisible="{Binding IsVisible4}">
                         <Label 
                             Text="Consumo mensual aproximado en litros"
-                            FontSize="20"
+                            FontSize="18"
                             FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            Margin="0,15,0,15"/>
+                            HorizontalOptions="Center"/>
                         
                         <Label
                             FontSize="Medium"
@@ -743,26 +816,28 @@
                     <!--Ubicación-->
                     <StackLayout
                         IsVisible="{Binding IsVisible5}"
-                        VerticalOptions="CenterAndExpand"
-                        Margin="0,0,0,60">
+                        VerticalOptions="FillAndExpand"
+                        Margin="0,0,0,20">
                         <Label 
                             Text="Ubicación cliente"
-                            FontSize="20"
+                            FontSize="18"
                             FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            Margin="0,15,0,15"/>
+                            HorizontalOptions="Center"/>
                         <StackLayout 
                             Orientation="Horizontal">
                             <Button
+                                BackgroundColor="#003399"
+                                TextColor="White"
+                                FontAttributes="Bold"
                                 Command="{Binding ObtenerUbicacionCommand}"
-                                FontSize="Medium"
+                                FontSize="16"
                                 HorizontalOptions="StartAndExpand" 
                                 IsEnabled="{Binding ModoLectura}"
                                 Text="Obtener ubicación"/>
                             <Button
                                 BackgroundColor="White"
                                 Command="{Binding OpenMapCommand}"
-                                HeightRequest="15"
+                                HeightRequest="20"
                                 ImageSource="ic_location_on_red"/>
                         </StackLayout>
                         
@@ -807,6 +882,9 @@
                     </StackLayout>
                     
                     <Button
+                        BackgroundColor="#003399"
+                            TextColor="White"
+                            FontAttributes="Bold"
                         Command="{Binding AcualizarCommand}"
                         FontSize="Medium"
                         HorizontalOptions="FillAndExpand"

@@ -23,6 +23,6 @@ namespace Probe.Modelo.Modulos.Sistema
 
     public class Data
     {
-        public List<Empresa> surveys { get; set; }
+        public List<Survey> surveys { get; set; }
     }
 }

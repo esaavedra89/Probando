@@ -123,20 +123,10 @@ namespace Probe.Vistas.Modulos
                 Respuesta objRespuesta = await objEmpresaB.GET_API_Cliente("http://api.rimrepuestos.com/api/survey/data").ConfigureAwait(false);
                 if (objRespuesta.Valido)
                 {
-                    Stream objStream = objRespuesta.Resultado as Stream;
+                    List<Empresa> surveys = objRespuesta.Resultado as List<Empresa>;
 
-                    // Leemos la respuesta stream.
-                    using (StreamReader sr1 = new StreamReader(objStream))
-                    using (JsonReader reader1 = new JsonTextReader(sr1))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        var generalRutas = serializer.Deserialize<RespuestaAPI>(reader1);
-                        if (generalRutas != null)
-                        {
-                            this.ListaSurveys = generalRutas.data.surveys;
-                            this.Surveys = generalRutas.data.surveys;
-                        }
-                    }
+                    this.ListaSurveys = surveys;
+                    this.Surveys = surveys;
                 }
                 else
                 {

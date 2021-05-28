@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -107,6 +108,7 @@ namespace Probe.Vistas.Modulos
         bool _isVisible3 = false;
         bool _isVisible4 = false;
         bool _isVisible5 = false;
+        bool _isVisible6 = false;
 
         #endregion
 
@@ -191,6 +193,15 @@ namespace Probe.Vistas.Modulos
             {
                 _isVisible5 = value;
                 OnPropertyChanged("IsVisible5");
+            }
+        }
+        public bool IsVisible6
+        {
+            get { return _isVisible6; }
+            set
+            {
+                _isVisible6 = value;
+                OnPropertyChanged("IsVisible6");
             }
         }
 
@@ -881,6 +892,16 @@ namespace Probe.Vistas.Modulos
                 });
             }
         }
+        public Command IsVisible6Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    Pestanas(6);
+                });
+            }
+        }
 
         public Command EnviarEmail1Command
         {
@@ -899,6 +920,46 @@ namespace Probe.Vistas.Modulos
                 return new Command(() =>
                 {
                     ValidarEmail(2);
+                });
+            }
+        }
+        public Command EnviarEmail11Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    ValidarEmail(11);
+                });
+            }
+        }
+        public Command EnviarEmail12Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    ValidarEmail(12);
+                });
+            }
+        }
+        public Command EnviarEmail21Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    ValidarEmail(21);
+                });
+            }
+        }
+        public Command EnviarEmail22Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    ValidarEmail(22);
                 });
             }
         }
@@ -922,6 +983,46 @@ namespace Probe.Vistas.Modulos
                 });
             }
         }
+        public Command LlamarTelefono11Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    LlamarNumero(this.Telefono11);
+                });
+            }
+        }
+        public Command LlamarTelefono12Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    LlamarNumero(this.Telefono12);
+                });
+            }
+        }
+        public Command LlamarTelefono21Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    LlamarNumero(this.Telefono21);
+                });
+            }
+        }
+        public Command LlamarTelefono22Command
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    LlamarNumero(this.Telefono22);
+                });
+            }
+        }
         public Command OpenMapCommand
         {
             get
@@ -932,7 +1033,17 @@ namespace Probe.Vistas.Modulos
                 });
             }
         }
-        
+        public Command NavegarWebCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    NavegarSitioWeb();
+                });
+            }
+        }
+
         #endregion
 
         #region Constructores
@@ -969,8 +1080,8 @@ namespace Probe.Vistas.Modulos
                 this.Email2 = this.ObjVendedor.Email2;
                 this.Telefono1 = this.ObjVendedor.Telefono1;
                 this.Telefono2 = this.ObjVendedor.Telefono2;
-                this.Latitud = this.ObjVendedor.position.lat;
-                this.Longitud = this.ObjVendedor.position.lng;
+                this.Latitud = this.ObjVendedor.Latitud;
+                this.Longitud = this.ObjVendedor.Longitud;
                 this.Web = this.ObjVendedor.SitioWeb;
                 this.Instagram = this.ObjVendedor.Instagram;
                 this.Facebook = this.ObjVendedor.Facebook;
@@ -992,27 +1103,27 @@ namespace Probe.Vistas.Modulos
                 this.SiguienteAccion = this.ObjVendedor.SiguienteAccion;
                 this.SiguienteAccionSelected = this.ObjVendedor.FechaSiguienteAccion;
 
-                this.NombreContacto1 = this.ObjVendedor.contacts.contact_1.NombreContacto1;
-                this.ApellidoContacto1 = this.ObjVendedor.contacts.contact_1.ApellidoContacto1;
-                this.Email11 = this.ObjVendedor.contacts.contact_1.Email11;
-                this.Email12 = this.ObjVendedor.contacts.contact_1.Email12;
-                this.Telefono11 = this.ObjVendedor.contacts.contact_1.Telefono11;
-                this.Telefono12 = this.ObjVendedor.contacts.contact_1.Telefono12;
-                this.Instagram1 = this.ObjVendedor.contacts.contact_1.Instagram1;
-                this.Facebook1 = this.ObjVendedor.contacts.contact_1.Facebook1;
-                this.Hobbies1 = this.ObjVendedor.contacts.contact_1.Hobbies1;
-                this.PersonaRelacionada1 = this.ObjVendedor.contacts.contact_1.PersonaRelacionada1;
+                this.NombreContacto1 = this.ObjVendedor.Contacto1.NombreContacto1;
+                this.ApellidoContacto1 = this.ObjVendedor.Contacto1.ApellidoContacto1;
+                this.Email11 = this.ObjVendedor.Contacto1.Email11;
+                this.Email12 = this.ObjVendedor.Contacto1.Email12;
+                this.Telefono11 = this.ObjVendedor.Contacto1.Telefono11;
+                this.Telefono12 = this.ObjVendedor.Contacto1.Telefono12;
+                this.Instagram1 = this.ObjVendedor.Contacto1.Instagram1;
+                this.Facebook1 = this.ObjVendedor.Contacto1.Facebook1;
+                this.Hobbies1 = this.ObjVendedor.Contacto1.Hobbies1;
+                this.PersonaRelacionada1 = this.ObjVendedor.Contacto1.PersonaRelacionada1;
 
-                this.NombreContacto2 = this.ObjVendedor.contacts.contact_2.NombreContacto2;
-                this.ApellidoContacto2 = this.ObjVendedor.contacts.contact_2.ApellidoContacto2;
-                this.Email21 = this.ObjVendedor.contacts.contact_2.Email21;
-                this.Email22 = this.ObjVendedor.contacts.contact_2.Email22;
-                this.Telefono21 = this.ObjVendedor.contacts.contact_2.Telefono21;
-                this.Telefono22 = this.ObjVendedor.contacts.contact_2.Telefono22;
-                this.Instagram2 = this.ObjVendedor.contacts.contact_2.Instagram2;
-                this.Facebook2 = this.ObjVendedor.contacts.contact_2.Facebook12;
-                this.Hobbies2 = this.ObjVendedor.contacts.contact_2.Hobbies2;
-                this.PersonaRelacionada2 = this.ObjVendedor.contacts.contact_2.PersonaRelacionada2;
+                this.NombreContacto2 = this.ObjVendedor.Contacto2.NombreContacto2;
+                this.ApellidoContacto2 = this.ObjVendedor.Contacto2.ApellidoContacto2;
+                this.Email21 = this.ObjVendedor.Contacto2.Email21;
+                this.Email22 = this.ObjVendedor.Contacto2.Email22;
+                this.Telefono21 = this.ObjVendedor.Contacto2.Telefono21;
+                this.Telefono22 = this.ObjVendedor.Contacto2.Telefono22;
+                this.Instagram2 = this.ObjVendedor.Contacto2.Instagram2;
+                this.Facebook2 = this.ObjVendedor.Contacto2.Facebook12;
+                this.Hobbies2 = this.ObjVendedor.Contacto2.Hobbies2;
+                this.PersonaRelacionada2 = this.ObjVendedor.Contacto2.PersonaRelacionada2;
 
                 this.Mineral15w40 = this.ObjVendedor.Consumo.Mineral15w40.ToString();
                 this.Mineral20w50 = this.ObjVendedor.Consumo.Mineral20w50.ToString();
@@ -1029,14 +1140,7 @@ namespace Probe.Vistas.Modulos
             }
             catch (Exception exc)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                    // Mostramos mensaje.
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
         }
 
@@ -1048,14 +1152,7 @@ namespace Probe.Vistas.Modulos
             }
             catch (Exception exc)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                    // Mostramos mensaje.
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
         }
 
@@ -1160,81 +1257,43 @@ namespace Probe.Vistas.Modulos
             {
                 if (string.IsNullOrEmpty(this.RIF))
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Por favor, ingrese el RIF.",
-                        "Aceptar");
-
+                    MostrarMensaje("Aviso", "Por favor, ingrese el RIF.");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(this.RazonSocial))
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Por favor, ingrese la razón social.",
-                        "Aceptar");
-
+                    MostrarMensaje("Aviso", "Por favor, ingrese la razón social.");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(this.NombreComercial))
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Por favor, ingrese el nombre comercial.",
-                        "Aceptar");
-
+                    MostrarMensaje("Aviso", "Por favor, ingrese el nombre comercial.");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(this.Telefono1))
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Por favor, ingrese el número telefónico #1.",
-                        "Aceptar");
-
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(this.Telefono2))
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Por favor, ingrese el número telefónico #2.",
-                        "Aceptar");
-
+                    MostrarMensaje("Aviso", "Por favor, ingrese el número telefónico #1.");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(this.Direccion))
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Por favor, ingrese la dirección.",
-                        "Aceptar");
-
+                    MostrarMensaje("Aviso", "Por favor, ingrese la dirección.");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(this.Ciudad))
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Por favor, ingrese la ciudad.",
-                        "Aceptar");
-
+                    MostrarMensaje("Aviso", "Por favor, ingrese la ciudad.");
                     return;
                 }
 
                 if (Latitud == 0 && Longitud == 0)
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "Debe obtener la ubicación.",
-                        "Aceptar");
-
+                    MostrarMensaje("Aviso", "Debe obtener la ubicación.");
                     return;
                 }
 
@@ -1242,76 +1301,45 @@ namespace Probe.Vistas.Modulos
 
                 if (!string.IsNullOrEmpty(Email1) && !objUtilitarios.IsValidEmail(Email1))
                 {
-                    this.Busy = false;
-                    this.IsEnabledPage = true;
-                    await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Correo electrónico #1 no tiene formato valido.",
-                    "Aceptar");
+                    MostrarMensaje("Aviso", "Correo electrónico #1 no tiene formato valido.");
+                    return;
                 }
 
                 if (!string.IsNullOrEmpty(Email2) && !objUtilitarios.IsValidEmail(Email2))
                 {
-                    this.Busy = false;
-                    this.IsEnabledPage = true;
-                    await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Correo electrónico #2 no tiene formato valido.",
-                    "Aceptar");
+                    MostrarMensaje("Aviso", "Correo electrónico #2 no tiene formato valido.");
+                    return;
                 }
 
                 if (!string.IsNullOrEmpty(Email11) && !objUtilitarios.IsValidEmail(Email11))
                 {
-                    this.Busy = false;
-                    this.IsEnabledPage = true;
-                    await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Correo electrónico #1 de sección Contacto #1 no tiene formato valido.",
-                    "Aceptar");
+                    MostrarMensaje("Aviso", "Correo electrónico #1 del Contacto #1 no tiene formato valido.");
+                    return;
                 }
 
                 if (!string.IsNullOrEmpty(Email12) && !objUtilitarios.IsValidEmail(Email12))
                 {
-                    this.Busy = false;
-                    this.IsEnabledPage = true;
-                    await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Correo electrónico #2 de sección Contacto #1 no tiene formato valido.",
-                    "Aceptar");
+                    MostrarMensaje("Aviso", "Correo electrónico #2 del Contacto #1 no tiene formato valido.");
+                    return;
                 }
 
                 if (!string.IsNullOrEmpty(Email21) && !objUtilitarios.IsValidEmail(Email21))
                 {
-                    this.Busy = false;
-                    this.IsEnabledPage = true;
-                    await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Correo electrónico #1 de sección Contacto #2 no tiene formato valido.",
-                    "Aceptar");
+                    MostrarMensaje("Aviso", "Correo electrónico #1 del Contacto #2 no tiene formato valido.");
+                    return;
                 }
 
                 if (!string.IsNullOrEmpty(Email22) && !objUtilitarios.IsValidEmail(Email22))
                 {
-                    this.Busy = false;
-                    this.IsEnabledPage = true;
-                    await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Correo electrónico #2 de sección Contacto #2 no tiene formato valido.",
-                    "Aceptar");
+                    MostrarMensaje("Aviso", "Correo electrónico #2 del Contacto #2 no tiene formato valido.");
+                    return;
                 }
 
                 await Escanear().ConfigureAwait(false);
             }
             catch (Exception exc)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                    // Mostramos mensaje.
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
         }
 
@@ -1323,7 +1351,7 @@ namespace Probe.Vistas.Modulos
                 EngineData engineData = EngineData.Instance();
 
                 Empresa objEmpresa = new Empresa();
-                objEmpresa.IdEmpresa = 1;
+                objEmpresa.IdEmpresa = 0;
                 objEmpresa.IdVendedor = engineData.IdVendedor;
                 objEmpresa.RIF = this.RIF;
                 objEmpresa.RazonSocial = this.RazonSocial;
@@ -1342,69 +1370,60 @@ namespace Probe.Vistas.Modulos
                 objEmpresa.Ciudad = this.Ciudad;
                 objEmpresa.CodigoPostal = this.CodigoPostal;
                 objEmpresa.Estado = this.Estado;
-                //objEmpresa.Latitud = this.Latitud;
-                //objEmpresa.Longitud = this.Longitud;
-                objEmpresa.position = new position();
-                objEmpresa.position.lat = this.Latitud;
-                objEmpresa.position.lng = this.Longitud;
+                objEmpresa.Latitud = this.Latitud;
+                objEmpresa.Longitud = this.Longitud;
+                
                 objEmpresa.IdEstadoCliente = (this.EstadoClienteSeleccionada != null ? this.EstadoClienteSeleccionada.Index : 0);
                 objEmpresa.NombreEstadoCliente = (this.EstadoClienteSeleccionada != null ? this.EstadoClienteSeleccionada.Name : "");
 
-                // Estado.
-                //objEmpresa.EstadoObjeto = new Estado();
-                //objEmpresa.EstadoObjeto.NumeroCliente = Convert.ToInt32(this.NumeroCliente);
-                //objEmpresa.EstadoObjeto.Cliente = this.ClienteEstado;
-                //objEmpresa.EstadoObjeto.Prospecto = this.Prospecto;
-
                 // Contacto #1.
-                objEmpresa.contacts = new Contacts();
-                objEmpresa.contacts.contact_1 = new Contacto1();
-                objEmpresa.contacts.contact_1.NombreContacto1 = this.NombreContacto1;
-                objEmpresa.contacts.contact_1.ApellidoContacto1 = this.ApellidoContacto1;
-                objEmpresa.contacts.contact_1.Email11 = this.Email11;
-                objEmpresa.contacts.contact_1.Email12 = this.Email12;
-                objEmpresa.contacts.contact_1.Telefono11 = this.Telefono11;
-                objEmpresa.contacts.contact_1.Telefono12 = this.Telefono12;
-                objEmpresa.contacts.contact_1.Instagram1 = this.Instagram1;
-                objEmpresa.contacts.contact_1.Facebook1 = this.Facebook1;
-                objEmpresa.contacts.contact_1.Hobbies1 = this.Hobbies1;
-                objEmpresa.contacts.contact_1.PersonaRelacionada1 = this.PersonaRelacionada1;
+                objEmpresa.Contacto1 = new Contacto1();
+                objEmpresa.Contacto1.NombreContacto1 = this.NombreContacto1;
+                //objEmpresa.Contacto1.ApellidoContacto1 = this.ApellidoContacto1;
+                objEmpresa.Contacto1.Email11 = this.Email11;
+                objEmpresa.Contacto1.Email12 = this.Email12;
+                objEmpresa.Contacto1.Telefono11 = this.Telefono11;
+                objEmpresa.Contacto1.Telefono12 = this.Telefono12;
+                objEmpresa.Contacto1.Instagram1 = this.Instagram1;
+                objEmpresa.Contacto1.Facebook1 = this.Facebook1;
+                objEmpresa.Contacto1.Hobbies1 = this.Hobbies1;
+                objEmpresa.Contacto1.PersonaRelacionada1 = this.PersonaRelacionada1;
 
                 // Contacto #2.
-                objEmpresa.contacts.contact_2 = new Contacto2();
-                objEmpresa.contacts.contact_2.NombreContacto2 = this.NombreContacto2;
-                objEmpresa.contacts.contact_2.ApellidoContacto2 = this.ApellidoContacto2;
-                objEmpresa.contacts.contact_2.Email21 = this.Email21;
-                objEmpresa.contacts.contact_2.Email22 = this.Email22;
-                objEmpresa.contacts.contact_2.Telefono21 = this.Telefono21;
-                objEmpresa.contacts.contact_2.Telefono22 = this.Telefono22;
-                objEmpresa.contacts.contact_2.Instagram2 = this.Instagram2;
-                objEmpresa.contacts.contact_2.Facebook12 = this.Facebook2;
-                objEmpresa.contacts.contact_2.Hobbies2 = this.Hobbies2;
-                objEmpresa.contacts.contact_2.PersonaRelacionada2 = this.PersonaRelacionada2;
+                objEmpresa.Contacto2 = new Contacto2();
+                objEmpresa.Contacto2.NombreContacto2 = this.NombreContacto2;
+                //objEmpresa.Contacto2.ApellidoContacto2 = this.ApellidoContacto2;
+                objEmpresa.Contacto2.Email21 = this.Email21;
+                objEmpresa.Contacto2.Email22 = this.Email22;
+                objEmpresa.Contacto2.Telefono21 = this.Telefono21;
+                objEmpresa.Contacto2.Telefono22 = this.Telefono22;
+                objEmpresa.Contacto2.Instagram2 = this.Instagram2;
+                objEmpresa.Contacto2.Facebook12 = this.Facebook2;
+                objEmpresa.Contacto2.Hobbies2 = this.Hobbies2;
+                objEmpresa.Contacto2.PersonaRelacionada2 = this.PersonaRelacionada2;
 
                 objEmpresa.IdSectorComercial = (this.SectorComercialSeleccionada != null ? this.SectorComercialSeleccionada.Index : 0);
                 objEmpresa.SectorComercial = (this.SectorComercialSeleccionada != null ? this.SectorComercialSeleccionada.Name : "");
 
                 // Consumo mensual aproximado en litros.
                 objEmpresa.Consumo = new Consumo();
-                objEmpresa.Consumo.Mineral15w40 = Convert.ToDecimal(this.Mineral15w40);
-                objEmpresa.Consumo.Mineral20w50 = Convert.ToDecimal(this.Mineral20w50);
-                objEmpresa.Consumo.SemiSintetico15w40 = Convert.ToDecimal(this.SemiSintetico15w40);
-                objEmpresa.Consumo.SemiSintetico20w50 = Convert.ToDecimal(this.SemiSintetico20w50);
-                objEmpresa.Consumo.DexronIII = Convert.ToDecimal(this.DexronIII);
-                objEmpresa.Consumo.Motos4t = Convert.ToDecimal(this.Motos4T);
-                objEmpresa.Consumo.ISO80w90 = Convert.ToDecimal(this.ISO80w90);
-                objEmpresa.Consumo.Diesel50 = Convert.ToDecimal(this.Diesel50);
-                objEmpresa.Consumo.Diesel15w40 = Convert.ToDecimal(this.Diesel15w40);
-                objEmpresa.Consumo.Hidraulico68 = Convert.ToDecimal(this.Hidraulico68);
-                objEmpresa.Consumo.LigaFrenoDot3 = Convert.ToDecimal(this.LigaFrenoDot3);
-                objEmpresa.Consumo.Flushing = Convert.ToDecimal(this.Flushing);
+                objEmpresa.Consumo.Mineral15w40 = (string.IsNullOrEmpty(this.Mineral15w40) ? 0 : Convert.ToDecimal(this.Mineral15w40));
+                objEmpresa.Consumo.Mineral20w50 = (string.IsNullOrEmpty(this.Mineral20w50) ? 0 : Convert.ToDecimal(this.Mineral20w50));
+                objEmpresa.Consumo.SemiSintetico15w40 = (string.IsNullOrEmpty(this.SemiSintetico15w40) ? 0 : Convert.ToDecimal(this.SemiSintetico15w40));
+                objEmpresa.Consumo.SemiSintetico20w50 = (string.IsNullOrEmpty(this.SemiSintetico20w50) ? 0 : Convert.ToDecimal(this.SemiSintetico20w50));
+                objEmpresa.Consumo.DexronIII = (string.IsNullOrEmpty(this.DexronIII) ? 0 : Convert.ToDecimal(this.DexronIII));
+                objEmpresa.Consumo.Motos4t = (string.IsNullOrEmpty(this.Motos4T) ? 0 : Convert.ToDecimal(this.Motos4T));
+                objEmpresa.Consumo.ISO80w90 = (string.IsNullOrEmpty(this.ISO80w90) ? 0 : Convert.ToDecimal(this.ISO80w90));
+                objEmpresa.Consumo.Diesel50 = (string.IsNullOrEmpty(this.Diesel50) ? 0 : Convert.ToDecimal(this.Diesel50));
+                objEmpresa.Consumo.Diesel15w40 = (string.IsNullOrEmpty(this.Diesel15w40) ? 0 : Convert.ToDecimal(this.Diesel15w40));
+                objEmpresa.Consumo.Hidraulico68 = (string.IsNullOrEmpty(this.Hidraulico68) ? 0 : Convert.ToDecimal(this.Hidraulico68));
+                objEmpresa.Consumo.LigaFrenoDot3 = (string.IsNullOrEmpty(this.LigaFrenoDot3) ? 0 : Convert.ToDecimal(this.LigaFrenoDot3));
+                objEmpresa.Consumo.Flushing = (string.IsNullOrEmpty(this.Flushing) ? 0 : Convert.ToDecimal(this.Flushing));
 
                 objEmpresa.Observaciones = this.Observaciones;
                 objEmpresa.FechaPrimeraVisita = this.PrimeraVisitaSelected;
                 objEmpresa.FechaPrimeraCompra = this.PrimeraCompraSelected;
-                objEmpresa.SiguienteAccion = this.SiguienteAccion;
+                objEmpresa.SiguienteAccion = (string.IsNullOrEmpty(this.SiguienteAccion) ? "0" : this.SiguienteAccion);
                 objEmpresa.FechaSiguienteAccion = this.SiguienteAccionSelected;
                 objEmpresa.VendedorEncargado = engineData.User;
 
@@ -1413,37 +1432,20 @@ namespace Probe.Vistas.Modulos
                 Respuesta peticionApi = await objEmpresaB.GuardarAPI(objEmpresa).ConfigureAwait(false);
                 if (peticionApi.Valido)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    MostrarMensaje("Exitos", "Guardado exitosamente");
+                    Device.BeginInvokeOnMainThread(() =>
                     {
-                        await Application.Current.MainPage.DisplayAlert(
-                            "Exitos",
-                            "Guardado exitosamente",
-                            "Aceptar");
-
                         LimpiarCampos();
                     });
-
                 }
                 else
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error en la petición: " + peticionApi.Mensaje,
-                        "Aceptar");
-                    });
+                    MostrarMensaje("Error", "Ha ocurrido un error en la petición: " + peticionApi.Mensaje);
                 }
             }
             catch (Exception exc)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
         }
 
@@ -1453,6 +1455,9 @@ namespace Probe.Vistas.Modulos
 
             try
             {
+                this.Busy = true;
+                this.IsEnabledPage = false;
+
                 locacion = await Geolocation.GetLocationAsync(new GeolocationRequest()
                 {
                     DesiredAccuracy = GeolocationAccuracy.Medium,
@@ -1470,20 +1475,17 @@ namespace Probe.Vistas.Modulos
             }
             catch (Xamarin.Essentials.FeatureNotEnabledException)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Aviso",
-                        "GPS apagado",
-                        "Aceptar");
-                    // Mostramos mensaje.
-                });
+                MostrarMensaje("Aviso", "GPS apagado");
             }
             catch (Exception exc)
             {
+                this.Busy = false;
+                this.IsEnabledPage = true;
                 throw exc;
             }
 
+            this.Busy = false;
+            this.IsEnabledPage = true;
             return locacion;
         }
 
@@ -1494,6 +1496,8 @@ namespace Probe.Vistas.Modulos
                 this.RIF = string.Empty;
                 this.RazonSocial = string.Empty;
                 this.NombreComercial = string.Empty;
+                this.NombreContacto1 = string.Empty;
+                this.ApellidoContacto1 = string.Empty;
                 this.Email1 = string.Empty;
                 this.Email2 = string.Empty;
                 this.Telefono1 = string.Empty;
@@ -1510,6 +1514,8 @@ namespace Probe.Vistas.Modulos
                 this.Estado = string.Empty;
                 this.Latitud = 0;
                 this.Longitud = 0;
+                this.EstadoClienteSeleccionada = null;
+                this.SectorComercialSeleccionada = null;
 
                 // Estado.
                 this.NumeroCliente = string.Empty;
@@ -1529,6 +1535,8 @@ namespace Probe.Vistas.Modulos
 
                 // Contacto #2.
 
+                this.NombreContacto2 = string.Empty;
+                this.ApellidoContacto2 = string.Empty;
                 this.Email21 = string.Empty;
                 this.Email22 = string.Empty;
                 this.Telefono21 = string.Empty;
@@ -1573,22 +1581,22 @@ namespace Probe.Vistas.Modulos
             try
             {
                 this.RIF = "J-12345678";
-                this.RazonSocial = "AirDrop SA";
-                this.NombreComercial = "AirDrop SA";
-                this.Email1 = "AirDropSA@gm.com";
-                this.Email2 = "AirDropSA2@gm.com";
+                this.RazonSocial = "Comercial Toledo SA";
+                this.NombreComercial = "IVOO";
+                this.Email1 = "Toledoventas@Toledo.com";
+                this.Email2 = "Toledofacturacion@Toledo.com";
                 this.Telefono1 = "04128577485";
                 this.Telefono2 = "04128577486";
-                this.Web = "www.intent.com";
-                this.Instagram = "AirDrop89";
-                this.Facebook = "Air Drop";
+                this.Web = "www.ivoo.com";
+                this.Instagram = "Toledo";
+                this.Facebook = "Toledo";
                 this.WhatsappBusiness = "584155142536";
-                this.Direccion = "Sector Costo Arriba";
+                this.Direccion = "Sector Costo Toledo";
                 this.Parroquia = "San Simón";
                 this.Municipio = "Los Godos";
                 this.Ciudad = "Caracas";
                 this.CodigoPostal = "8974";
-                this.Estado = "Acarigua";
+                this.Estado = "Toledo";
                 this.Latitud = 0;
                 this.Longitud = 0;
 
@@ -1599,7 +1607,7 @@ namespace Probe.Vistas.Modulos
 
                 // Contacto #1.
 
-                this.Email11 = "AirDropS123A@gm.com";
+                this.Email11 = "Toledo@gm.com";
                 this.Email12 = "AirDropSA456@gm.com";
                 this.Telefono11 = "417523631";
                 this.Telefono12 = "04121874585";
@@ -1610,7 +1618,7 @@ namespace Probe.Vistas.Modulos
 
                 // Contacto #2.
 
-                this.Email21 = "AirDropSA789@gm.com";
+                this.Email21 = "";
                 this.Email22 = string.Empty;
                 this.Telefono21 = "04268547485";
                 this.Telefono22 = string.Empty;
@@ -1661,6 +1669,7 @@ namespace Probe.Vistas.Modulos
                         this.IsVisible3 = false;
                         this.IsVisible4 = false;
                         this.IsVisible5 = false;
+                        this.IsVisible6 = false;
                         break;
                     case 2:
                         this.IsVisible1 = false;
@@ -1668,6 +1677,7 @@ namespace Probe.Vistas.Modulos
                         this.IsVisible3 = false;
                         this.IsVisible4 = false;
                         this.IsVisible5 = false;
+                        this.IsVisible6 = false;
                         break;
                     case 3:
                         this.IsVisible1 = false;
@@ -1675,6 +1685,7 @@ namespace Probe.Vistas.Modulos
                         this.IsVisible3 = true;
                         this.IsVisible4 = false;
                         this.IsVisible5 = false;
+                        this.IsVisible6 = false;
                         break;
                     case 4:
                         this.IsVisible1 = false;
@@ -1682,6 +1693,7 @@ namespace Probe.Vistas.Modulos
                         this.IsVisible3 = false;
                         this.IsVisible4 = true;
                         this.IsVisible5 = false;
+                        this.IsVisible6 = false;
                         break;
                     case 5:
                         this.IsVisible1 = false;
@@ -1689,6 +1701,15 @@ namespace Probe.Vistas.Modulos
                         this.IsVisible3 = false;
                         this.IsVisible4 = false;
                         this.IsVisible5 = true;
+                        this.IsVisible6 = false;
+                        break;
+                    case 6:
+                        this.IsVisible1 = false;
+                        this.IsVisible2 = false;
+                        this.IsVisible3 = false;
+                        this.IsVisible4 = false;
+                        this.IsVisible5 = false;
+                        this.IsVisible6 = true;
                         break;
 
                     default:
@@ -1697,77 +1718,104 @@ namespace Probe.Vistas.Modulos
                         this.IsVisible3 = false;
                         this.IsVisible4 = false;
                         this.IsVisible5 = false;
+                        this.IsVisible6 = false;
                         break;
                 }
             }
             catch (Exception exc)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
         }
 
-        async void ValidarEmail(int email) 
+        void ValidarEmail(int email) 
         {
             try
             {
                 Utilitarios objUtilitarios = new Utilitarios();
-                if (email == 1)
+                switch (email)
                 {
-                    if (string.IsNullOrEmpty(Email1))
-                    {
-                        this.Busy = false;
-                        this.IsEnabledPage = true;
-                        await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ingrese un correo electrónico",
-                        "Aceptar");
+                    case 1:
+                        if (string.IsNullOrEmpty(Email1))
+                        {
+                            MostrarMensaje("Aviso", "Ingrese un correo electrónico");
+                            return;
+                        }
 
-                        return;
-                    }
+                        if (!string.IsNullOrEmpty(Email1) && !objUtilitarios.IsValidEmail(Email1))
+                        {
+                            MostrarMensaje("Aviso", "Correo electrónico #1 no tiene formato valido.");
+                            return;
+                        }
+                        break;
+                    case 2:
+                        if (string.IsNullOrEmpty(Email2))
+                        {
+                            MostrarMensaje("Aviso", "Ingrese un correo electrónico");
+                            return;
+                        }
 
-                    if (!string.IsNullOrEmpty(Email1) && !objUtilitarios.IsValidEmail(Email1))
-                    {
-                        this.Busy = false;
-                        this.IsEnabledPage = true;
-                        await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Correo electrónico #1 no tiene formato valido.",
-                        "Aceptar");
+                        if (!string.IsNullOrEmpty(Email2) && !objUtilitarios.IsValidEmail(Email2))
+                        {
+                            MostrarMensaje("Aviso", "Correo electrónico #2 no tiene formato valido.");
+                            return;
+                        }
+                        break;
+                    case 11:
+                        if (string.IsNullOrEmpty(Email11))
+                        {
+                            MostrarMensaje("Aviso", "Ingrese un correo electrónico");
+                            return;
+                        }
 
-                        return;
-                    }
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(Email2))
-                    {
-                        this.Busy = false;
-                        this.IsEnabledPage = true;
-                        await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ingrese un correo electrónico",
-                        "Aceptar");
+                        if (!string.IsNullOrEmpty(Email11) && !objUtilitarios.IsValidEmail(Email11))
+                        {
+                            MostrarMensaje("Aviso", "Correo electrónico #1 no tiene formato valido.");
+                            return;
+                        }
+                        break;
+                    case 12:
+                        if (string.IsNullOrEmpty(Email12))
+                        {
+                            MostrarMensaje("Aviso", "Ingrese un correo electrónico");
+                            return;
+                        }
 
-                        return;
-                    }
+                        if (!string.IsNullOrEmpty(Email12) && !objUtilitarios.IsValidEmail(Email12))
+                        {
+                            MostrarMensaje("Aviso", "Correo electrónico #1 no tiene formato valido.");
+                            return;
+                        }
+                        break;
+                    case 21:
+                        if (string.IsNullOrEmpty(Email21))
+                        {
+                            MostrarMensaje("Aviso", "Ingrese un correo electrónico");
+                            return;
+                        }
 
-                    if (!string.IsNullOrEmpty(Email2) && !objUtilitarios.IsValidEmail(Email2))
-                    {
-                        this.Busy = false;
-                        this.IsEnabledPage = true;
-                        await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Correo electrónico #2 no tiene formato valido.",
-                        "Aceptar");
+                        if (!string.IsNullOrEmpty(Email21) && !objUtilitarios.IsValidEmail(Email21))
+                        {
+                            MostrarMensaje("Aviso", "Correo electrónico #1 no tiene formato valido.");
+                            return;
+                        }
+                        break;
+                    case 22:
+                        if (string.IsNullOrEmpty(Email22))
+                        {
+                            MostrarMensaje("Aviso", "Ingrese un correo electrónico");
+                            return;
+                        }
 
-                        return;
-                    }
+                        if (!string.IsNullOrEmpty(Email22) && !objUtilitarios.IsValidEmail(Email22))
+                        {
+                            MostrarMensaje("Aviso", "Correo electrónico #1 no tiene formato valido.");
+                            return;
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
 
                 // Enviar correo.
@@ -1775,13 +1823,7 @@ namespace Probe.Vistas.Modulos
             }
             catch (Exception exc)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
         }
 
@@ -1790,10 +1832,32 @@ namespace Probe.Vistas.Modulos
             try
             {
                 List<string> listaCorreos = new List<string>();
-                if (email == 1)
-                    listaCorreos.Add(this.Email1);
-                else
-                    listaCorreos.Add(this.Email2);
+                
+                switch (email)
+                {
+                    case 1:
+                        listaCorreos.Add(this.Email1);
+                        break;
+                    case 2:
+                        listaCorreos.Add(this.Email2);
+                        break;
+                    case 11:
+                        listaCorreos.Add(this.Email11);
+                        break;
+                    case 12:
+                        listaCorreos.Add(this.Email12);
+                        break;
+                    case 21:
+                        listaCorreos.Add(this.Email21);
+                        break;
+                    case 22:
+                        listaCorreos.Add(this.Email22);
+                        break;
+
+                    default:
+                        MostrarMensaje("Aviso", "No enlistado.");
+                        return;
+                }
 
                 var message = new EmailMessage
                 {
@@ -1817,36 +1881,15 @@ namespace Probe.Vistas.Modulos
             }
             catch (ArgumentNullException)
             {
-                // Number was null or white space.
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ingrese un número telefónico",
-                        "Aceptar");
-                });
+                MostrarMensaje("Aviso", "Ingrese un número telefónico");
             }
             catch (FeatureNotSupportedException)
             {
-                // Phone Dialer is not supported on this device.
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Acción no soportada en este dispositivo.",
-                        "Aceptar");
-                });
+                MostrarMensaje("Aviso", "Acción no soportada en este dispositivo.");
             }
             catch (Exception exc)
             {
-                // Other error has occurred.
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
         }
 
@@ -1856,14 +1899,7 @@ namespace Probe.Vistas.Modulos
             {
                 if (this.Latitud == 0 && this.Longitud == 0)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await Application.Current.MainPage.DisplayAlert(
-                            "Error",
-                            "Debe obtener la ubicación",
-                            "Aceptar");
-                    });
-
+                    MostrarMensaje("Aviso", "Debe obtener la ubicación");
                     return;
                 }
 
@@ -1871,15 +1907,51 @@ namespace Probe.Vistas.Modulos
             }
             catch (Exception exc)
             {
-                // Other error has occurred.
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        "Ha ocurrido un error: " + exc.Message,
-                        "Aceptar");
-                });
+                MostrarMensaje("Error", "Ha ocurrido un error: " + exc.Message);
             }
+        }
+
+        async void NavegarSitioWeb()
+        {
+            try
+            {
+                bool urlValida = IsValidURL(this.Web);
+                if (string.IsNullOrEmpty(this.Web) || !urlValida)
+                {
+                    MostrarMensaje("Error", "Ingrese una URL valida");
+                    return;
+                }
+
+                await Browser.OpenAsync("http://" + this.Web, BrowserLaunchMode.SystemPreferred);
+            }
+            catch (UriFormatException) 
+            {
+                MostrarMensaje("Error", "Url no válida");
+            }
+            catch (Exception error)
+            {
+                MostrarMensaje("Error", "Ha ocurrido un error: " + error.Message.ToString());
+            }
+        }
+
+        bool IsValidURL(string URL)
+        {
+            string Pattern = @"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
+            Regex Rgx = new Regex(Pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return Rgx.IsMatch(URL);
+        }
+
+        void MostrarMensaje(string titulo, string mensaje) 
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                this.Busy = false;
+                this.IsEnabledPage = true;
+                await Application.Current.MainPage.DisplayAlert(
+                titulo,
+                mensaje,
+                "Aceptar");
+            });
         }
 
         #endregion

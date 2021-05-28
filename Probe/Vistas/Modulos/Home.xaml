@@ -23,11 +23,17 @@
                     HorizontalOptions="Center"
                     Margin="0,15,0,40"/>
                 <Button
+                    BackgroundColor="#003399"
+                            TextColor="White"
+                            FontAttributes="Bold"
                     Text="Registro Cliente"
                     VerticalOptions="Center" 
                     HorizontalOptions="FillAndExpand"
                     Command="{Binding NavegarRegistroCommand}"/>
                 <Button
+                    BackgroundColor="#003399"
+                            TextColor="White"
+                            FontAttributes="Bold"
                     Text="Lista Cliente"
                     VerticalOptions="Center" 
                     HorizontalOptions="FillAndExpand" 

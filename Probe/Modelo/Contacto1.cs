@@ -9,6 +9,33 @@ namespace Probe.Modelo
     {
         public int IdContacto1Local { get; set; }
 
+        public int IdContacto1 { get; set; }
+
+        public string NombreContacto1 { get; set; }
+
+        public string ApellidoContacto1 { get; set; }
+
+        public string Email11 { get; set; }
+
+        public string Email12 { get; set; }
+
+        public string Telefono11 { get; set; }
+
+        public string Telefono12 { get; set; }
+
+        public string Instagram1 { get; set; }
+
+        public string Facebook1 { get; set; }
+
+        public string Hobbies1 { get; set; }
+
+        public string PersonaRelacionada1 { get; set; }
+    }
+
+    public class Contact_1
+    {
+        public int IdContacto1Local { get; set; }
+
         [JsonProperty(PropertyName = "IdContacto1")]
         public int IdContacto1 { get; set; }
 

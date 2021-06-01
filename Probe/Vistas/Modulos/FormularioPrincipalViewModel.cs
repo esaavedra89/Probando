@@ -1458,11 +1458,16 @@ namespace Probe.Vistas.Modulos
                 this.Busy = true;
                 this.IsEnabledPage = false;
 
+                // Obtenemos el punto GPS.
+                //var request = new GeolocationRequest(GeolocationAccuracy.High);
+                //// Obtenemos coordenadas.
+                //var location = await Geolocation.GetLocationAsync(request).ConfigureAwait(false);
+
                 locacion = await Geolocation.GetLocationAsync(new GeolocationRequest()
                 {
                     DesiredAccuracy = GeolocationAccuracy.Medium,
                     Timeout = TimeSpan.FromSeconds(30)
-                });
+                }).ConfigureAwait(false);
                 if (locacion == null)
                 {
                     throw new Exception("GPS apagado");

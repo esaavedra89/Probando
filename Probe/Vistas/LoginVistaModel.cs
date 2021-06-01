@@ -119,8 +119,8 @@ namespace Probe.Vistas
 
         public LoginVistaModel()
         {
-            this.Usuario = "admin";
-            this.Contrasenna = "admin123";
+            //this.Usuario = "admin";
+            //this.Contrasenna = "admin123";
         } 
 
         #endregion
